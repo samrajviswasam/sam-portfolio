@@ -1,0 +1,75 @@
+.cursor-glow {
+  position: fixed;
+  width: 220px;
+  height: 220px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  opacity: 0;
+  background: radial-gradient(
+    circle,
+    rgba(90, 150, 255, 0.08) 0%,
+    rgba(140, 70, 255, 0.04) 35%,
+    transparent 70%
+  );
+  transition: opacity 0.25s ease;
+}
+
+.cursor-visible {
+  opacity: 1;
+}
+
+.global-scanline {
+  position: fixed;
+  left: 0;
+  top: -10vh;
+  width: 100%;
+  height: 1px;
+  pointer-events: none;
+  z-index: 9998;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(90, 150, 255, 0.25),
+    rgba(180, 80, 255, 0.25),
+    transparent
+  );
+  animation: globalScan 7s linear infinite;
+}
+
+@keyframes globalScan {
+  0% {
+    top: -10vh;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 110vh;
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .cursor-glow {
+    display: none;
+  }
+
+  .global-scanline {
+    animation-duration: 9s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .global-scanline {
+    animation: none;
+  }
+}

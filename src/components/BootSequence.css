@@ -1,0 +1,309 @@
+.boot-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #03050c;
+  animation: bootFadeOut 0.7s ease 2.6s forwards;
+}
+
+.boot-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(110, 135, 255, 0.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      rgba(110, 135, 255, 0.055) 1px,
+      transparent 1px
+    );
+  background-size: 42px 42px;
+  animation: bootGridMove 12s linear infinite;
+}
+
+.boot-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(90, 115, 255, 0.07),
+      transparent 42%
+    ),
+    linear-gradient(
+      rgba(255, 255, 255, 0.015) 50%,
+      transparent 50%
+    );
+  background-size: auto, 100% 4px;
+}
+
+.boot-content {
+  position: relative;
+  z-index: 2;
+  width: min(600px, calc(100% - 40px));
+  text-align: center;
+}
+
+.boot-logo {
+  color: #e5eaff;
+  font-family: "Inter", sans-serif;
+  font-size: clamp(42px, 8vw, 72px);
+  font-weight: 800;
+  letter-spacing: -0.07em;
+  animation: bootLogoIn 0.8s ease both;
+}
+
+.boot-logo span {
+  color: #879aff;
+  font-weight: 500;
+}
+
+.boot-subtitle {
+  margin-top: 7px;
+  color: #606c84;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  animation: bootLogoIn 0.8s ease 0.1s both;
+}
+
+.boot-terminal {
+  margin-top: 35px;
+  padding: 16px;
+  border: 1px solid rgba(125, 145, 255, 0.17);
+  background: rgba(4, 7, 17, 0.8);
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.45),
+    inset 0 0 60px rgba(100, 120, 255, 0.02);
+  text-align: left;
+}
+
+.boot-terminal-header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 11px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+  color: #69758d;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 7px;
+  letter-spacing: 0.11em;
+}
+
+.boot-terminal-header span:last-child {
+  color: #76a993;
+}
+
+.boot-lines {
+  min-height: 168px;
+  padding: 18px 4px;
+}
+
+.boot-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  color: #9aa7c0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 8px;
+  animation: bootLineIn 0.25s ease both;
+}
+
+.boot-prefix {
+  color: #8195ff;
+}
+
+.boot-cursor {
+  width: 6px;
+  height: 11px;
+  margin-left: 2px;
+  background: #879aff;
+  animation: cursorBlink 0.8s steps(2) infinite;
+}
+
+.boot-progress {
+  width: 100%;
+  height: 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.boot-progress-bar {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #6684ff,
+    #9a79ff,
+    #79a7ff
+  );
+  box-shadow: 0 0 12px rgba(120, 140, 255, 0.7);
+  transition: width 0.2s linear;
+}
+
+.boot-progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 9px;
+  color: #4f5b72;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 6px;
+  letter-spacing: 0.1em;
+}
+
+.boot-progress-info strong {
+  color: #8496df;
+  font-weight: 500;
+}
+
+.boot-corner {
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  border-color: rgba(130, 150, 255, 0.35);
+  border-style: solid;
+}
+
+.boot-corner-tl {
+  top: 28px;
+  left: 28px;
+  border-width: 1px 0 0 1px;
+}
+
+.boot-corner-tr {
+  top: 28px;
+  right: 28px;
+  border-width: 1px 1px 0 0;
+}
+
+.boot-corner-bl {
+  bottom: 28px;
+  left: 28px;
+  border-width: 0 0 1px 1px;
+}
+
+.boot-corner-br {
+  right: 28px;
+  bottom: 28px;
+  border-width: 0 1px 1px 0;
+}
+
+@keyframes bootLogoIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bootLineIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes cursorBlink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+
+  46%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes bootGridMove {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(42px);
+  }
+}
+
+@keyframes bootFadeOut {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .boot-terminal {
+    margin-top: 28px;
+    padding: 12px;
+  }
+
+  .boot-lines {
+    min-height: 185px;
+  }
+
+  .boot-line {
+    font-size: 7px;
+  }
+
+  .boot-corner {
+    width: 25px;
+    height: 25px;
+  }
+
+  .boot-corner-tl,
+  .boot-corner-tr {
+    top: 18px;
+  }
+
+  .boot-corner-bl,
+  .boot-corner-br {
+    bottom: 18px;
+  }
+
+  .boot-corner-tl,
+  .boot-corner-bl {
+    left: 18px;
+  }
+
+  .boot-corner-tr,
+  .boot-corner-br {
+    right: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-screen {
+    animation-duration: 0.2s;
+  }
+
+  .boot-grid {
+    animation: none;
+  }
+
+  .boot-cursor {
+    animation: none;
+  }
+}
